@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 // Note: URL encode @ as %40 in password
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://shobhitsourceryit_db_user:Shobhit%405655@cluster0.ajvggdr.mongodb.net/service_center?retryWrites=true&w=majority&appName=Cluster0';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://shobhitsourceryit_db_user:Shobhit%405655@cluster0.ajvggdr.mongodb.net/service_center_nes?retryWrites=true&w=majority&appName=Cluster0';
 
 const StaffSchema = new mongoose.Schema({
   name: String,
