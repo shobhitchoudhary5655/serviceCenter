@@ -27,7 +27,8 @@ const StockSchema: Schema = new Schema({
 });
 
 StockSchema.virtual('remaining_quantity').get(function() {
-  return this.quantity_in - this.quantity_used;
+  const stock = this as unknown as IStock;
+  return stock.quantity_in - stock.quantity_used;
 });
 
 export default (mongoose.models.Stock as Model<IStock>) || mongoose.model<IStock>('Stock', StockSchema);

@@ -24,12 +24,14 @@ const StaffSchema: Schema = new Schema({
 
 StaffSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 12);
+  const staff = this as unknown as IStaff;
+  staff.password = await bcrypt.hash(staff.password as string, 12);
   next();
 });
 
 StaffSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
-  return bcrypt.compare(candidatePassword, this.password);
+  const staff = this as unknown as IStaff;
+  return bcrypt.compare(candidatePassword, staff.password as string);
 };
 
 export default (mongoose.models.Staff as Model<IStaff>) || mongoose.model<IStaff>('Staff', StaffSchema);
