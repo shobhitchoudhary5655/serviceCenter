@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Layout from '@/components/Layout';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -20,11 +20,7 @@ export default function CustomersPage() {
     email: '',
   });
 
-  useEffect(() => {
-    fetchCustomers();
-  }, [search]);
-
-  const fetchCustomers = async () => {
+  const fetchCustomers = useCallback(async () => {
     try {
       setLoading(true);
       const url = search
@@ -47,7 +43,11 @@ export default function CustomersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [search]);
+
+  useEffect(() => {
+    fetchCustomers();
+  }, [fetchCustomers]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -177,7 +177,7 @@ export default function CustomersPage() {
                 {customers.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
-                      No customers found. Click "Add Customer" to create one.
+                      No customers found. Click &quot;Add Customer&quot; to create one.
                     </td>
                   </tr>
                 ) : (

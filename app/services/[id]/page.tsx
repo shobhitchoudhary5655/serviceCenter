@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Layout from '@/components/Layout';
 import { formatDate, formatCurrency } from '@/lib/utils';
@@ -11,13 +11,7 @@ export default function ServiceDetailPage() {
   const [service, setService] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (params.id) {
-      fetchService();
-    }
-  }, [params.id]);
-
-  const fetchService = async () => {
+  const fetchService = useCallback(async () => {
     try {
       const response = await fetch(`/api/services/${params.id}`);
       const data = await response.json();
@@ -31,7 +25,13 @@ export default function ServiceDetailPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [params.id]);
+
+  useEffect(() => {
+    if (params.id) {
+      fetchService();
+    }
+  }, [params.id, fetchService]);
 
   if (loading) {
     return (

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Layout from '@/components/Layout';
 import { formatDate } from '@/lib/utils';
@@ -13,14 +13,7 @@ export default function CustomerDetailPage() {
   const [services, setServices] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (params.id) {
-      fetchCustomer();
-      fetchServices();
-    }
-  }, [params.id]);
-
-  const fetchCustomer = async () => {
+  const fetchCustomer = useCallback(async () => {
     try {
       const response = await fetch(`/api/users/${params.id}`);
       const data = await response.json();
@@ -34,9 +27,9 @@ export default function CustomerDetailPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [params.id]);
 
-  const fetchServices = async () => {
+  const fetchServices = useCallback(async () => {
     try {
       const response = await fetch(`/api/services?user_id=${params.id}&limit=100`);
       const data = await response.json();
@@ -46,7 +39,14 @@ export default function CustomerDetailPage() {
     } catch (error) {
       console.error('Failed to fetch services:', error);
     }
-  };
+  }, [params.id]);
+
+  useEffect(() => {
+    if (params.id) {
+      fetchCustomer();
+      fetchServices();
+    }
+  }, [params.id, fetchCustomer, fetchServices]);
 
   if (loading) {
     return (

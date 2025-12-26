@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Layout from '@/components/Layout';
 import { Download } from 'lucide-react';
 import {
@@ -22,11 +22,7 @@ export default function ReportsPage() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
-  useEffect(() => {
-    fetchStats();
-  }, [startDate, endDate]);
-
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     try {
       let url = '/api/dashboard/stats';
       if (startDate || endDate) {
@@ -45,7 +41,11 @@ export default function ReportsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [startDate, endDate]);
+
+  useEffect(() => {
+    fetchStats();
+  }, [fetchStats]);
 
   if (loading) {
     return (
