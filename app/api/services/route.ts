@@ -99,6 +99,7 @@ export async function POST(request: NextRequest) {
       amount_paid,
       next_due_date,
       products_used, // Array of { stock_id, quantity_used }
+      service_details, // Optional: contains oil_name, tyres, etc.
     } = await request.json();
 
     if (!user_id || !service_date || !service_type || !amount_paid) {

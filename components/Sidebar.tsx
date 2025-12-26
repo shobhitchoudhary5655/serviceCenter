@@ -14,6 +14,7 @@ import {
   LogOut,
   Menu,
   X,
+  DollarSign,
 } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -39,6 +40,7 @@ export default function Sidebar({ userRole }: SidebarProps) {
     { href: '/customers', label: 'Customers', icon: Users, roles: ['owner', 'admin'] },
     { href: '/services', label: 'Services', icon: Wrench, roles: ['owner', 'admin'] },
     { href: '/stock', label: 'Stock', icon: Package, roles: ['owner', 'admin'] },
+    { href: '/product-prices', label: 'Product Prices', icon: DollarSign, roles: ['owner', 'admin'] },
     { href: '/invoices', label: 'Invoices', icon: FileText, roles: ['owner', 'admin', 'invoice_biller'] },
     { href: '/reports', label: 'Reports', icon: BarChart3, roles: ['owner', 'admin'] },
     { href: '/import', label: 'Import Excel', icon: Upload, roles: ['owner', 'admin'] },

@@ -11,6 +11,7 @@ import './Stock';
 import './ServiceProduct';
 import './Invoice';
 import './Event';
+import './ProductPrice';
 
 // Re-export models for convenience
 export { default as User } from './User';
@@ -20,4 +21,5 @@ export { default as Stock } from './Stock';
 export { default as ServiceProduct } from './ServiceProduct';
 export { default as Invoice } from './Invoice';
 export { default as Event } from './Event';
+export { default as ProductPrice } from './ProductPrice';
 

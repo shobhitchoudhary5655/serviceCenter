@@ -261,7 +261,7 @@ export default function InvoicesPage() {
                   <button
                     type="button"
                     onClick={() => setShowModal(false)}
-                    className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+                    className="px-4 py-2 border border-gray-300 text-gray-900 rounded-lg hover:bg-gray-50"
                   >
                     Cancel
                   </button>
