@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
+// Import models index to register all models
+import '@/models';
 import Service from '@/models/Service';
 import Invoice from '@/models/Invoice';
 import Stock from '@/models/Stock';

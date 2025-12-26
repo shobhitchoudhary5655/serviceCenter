@@ -115,9 +115,19 @@ The project uses:
 - Verify no server-side code uses browser APIs directly
 
 ### MongoDB Connection Fails
-- Check MongoDB Atlas IP whitelist
+**Common Error:** "Could not connect to any servers - IP not whitelisted"
+
+**Solution:**
+1. Go to MongoDB Atlas → Network Access
+2. Click "Add IP Address"
+3. Click "Allow Access from Anywhere" (adds `0.0.0.0/0/0`)
+4. Wait 1-2 minutes for changes to take effect
+5. See `MONGODB_ATLAS_SETUP.md` for detailed instructions
+
+**Also check:**
 - Verify MONGODB_URI is correct and URL-encoded
-- Check MongoDB Atlas network access settings
+- Check environment variable is set in Vercel Dashboard
+- Password must be URL-encoded (`@` → `%40`)
 
 ### Environment Variables Not Loading
 - Verify variables are set in Vercel Dashboard

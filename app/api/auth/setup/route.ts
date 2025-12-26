@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
+// Import models index to register all models
+import '@/models';
 import Staff from '@/models/Staff';
 
 // This endpoint allows creating the first admin user if no users exist
