@@ -10,11 +10,13 @@ export default function Home() {
   useEffect(() => {
     const checkAuth = async () => {
       // Check if user is logged in
-      const token = document.cookie.split(';').find(c => c.trim().startsWith('token='));
-      if (token) {
-        router.push('/dashboard');
-        setChecking(false);
-        return;
+      if (typeof document !== 'undefined') {
+        const token = document.cookie.split(';').find(c => c.trim().startsWith('token='));
+        if (token) {
+          router.push('/dashboard');
+          setChecking(false);
+          return;
+        }
       }
 
       // Check if admin user exists

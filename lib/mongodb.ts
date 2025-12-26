@@ -3,8 +3,9 @@ import mongoose from 'mongoose';
 // MongoDB connection string - use environment variable or default
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://shobhitsourceryit_db_user:Shobhit%405655@cluster0.ajvggdr.mongodb.net/service_center?retryWrites=true&w=majority&appName=Cluster0';
 
-if (!MONGODB_URI) {
-  throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
+// Only throw error at runtime, not during build
+if (typeof process !== 'undefined' && process.env.NODE_ENV === 'production' && !process.env.MONGODB_URI) {
+  console.warn('Warning: MONGODB_URI environment variable is not set');
 }
 
 interface MongooseCache {
